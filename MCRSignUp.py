@@ -40,6 +40,7 @@ if os.path.isfile(oldSignUpFileName):
             previous_exchanges[row[0]] = row[2]
 
 new_sign_ups = dict()
+print("\nNew Sign Ups")
 with open(signUpsFileName) as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     for row in reader:
@@ -54,11 +55,12 @@ accepted_sign_ups = []
 
 while len(accepted_sign_ups) < number_of_people_to_accept and len(new_sign_ups) > 0:
     person = weighted_choice(new_sign_ups)
-    print(person)
     accepted_sign_ups.append(person)
     del new_sign_ups[person]
 
+print("\n***** ACCEPTED SIGN UPS *****")
 for accepted_person in accepted_sign_ups:
+    print(accepted_person)
     if accepted_person in old_sign_ups:
         old_sign_ups[accepted_person] += 1.
     else:
@@ -73,9 +75,4 @@ f = open(newSignUpFileName, "w")
 for person in old_sign_ups:
     f.write("{}, {},{}\n".format(person, old_sign_ups[person], previous_exchanges[person]))
 f.close()
-
-
-
-
-
 
