@@ -5,7 +5,7 @@ from shutil import copyfile
 
 
 this_exchange = "Linacre"
-number_of_people_to_accept = 3
+number_of_people_to_accept = 300
 
 def weighted_choice(sign_up_dictionary):
     total_weight = 0.
@@ -58,18 +58,17 @@ while len(accepted_sign_ups) < number_of_people_to_accept and len(new_sign_ups) 
     accepted_sign_ups.append(person)
     del new_sign_ups[person]
 
+
 print("\n***** ACCEPTED SIGN UPS *****")
 for accepted_person in accepted_sign_ups:
     print(accepted_person)
     if accepted_person in old_sign_ups:
         old_sign_ups[accepted_person] += 1.
-    else:
-        old_sign_ups[accepted_person] = 1.
-
-    if accepted_person in previous_exchanges:
         previous_exchanges[accepted_person] += "{}.".format(this_exchange)
     else:
+        old_sign_ups[accepted_person] = 1.
         previous_exchanges[accepted_person] = "{}.".format(this_exchange)
+
 
 f = open(newSignUpFileName, "w")
 for person in old_sign_ups:
